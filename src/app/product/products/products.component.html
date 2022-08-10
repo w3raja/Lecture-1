@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let p of products | productSearch:pText" [id]="p.Id">
+            <tr *ngFor="let p of products | productSearch:pText; let i = index">
                <td>{{p.Id}}</td>
                <td>{{p.Title | uppercase}}</td>
                <td><img *ngIf="showImage" [src]="p.Image" /></td>
@@ -29,12 +29,11 @@
                <td>{{p.Color}}</td>
                <td>{{p.Agency}}</td>
                <td>
-                <input type="number" placeholder="enter quantity" (input)="checkQty($event)" />
+                <input type="number" placeholder="enter quantity" (input)="checkQty($event,i)" />
+
                 <button *ngIf="p.inStock" class="btn btn-success"
-                 [disabled]="btn"  (click)="onBuy($event, p.Id)"> Buy </button>
+                 [disabled]="btn"  (click)="onBuy($event)"> Buy </button>
                 <span *ngIf="!p.inStock"> Out of Stock </span>
-
-
             </td>
             </tr>
 

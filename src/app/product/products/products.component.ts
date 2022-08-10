@@ -6,6 +6,7 @@ import {
   OnInit,
   QueryList,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { Abc } from 'src/app/entitites/abc.entity';
 import { IProduct } from 'src/app/entitites/product.entity';
@@ -15,6 +16,8 @@ import { IProduct } from 'src/app/entitites/product.entity';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
+
+
 export class ProductsComponent implements OnInit, OnDestroy {
   products!: IProduct[];
   pText = '';
@@ -23,6 +26,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   notification: boolean = false;
 
   showImage:boolean = true;
+
+
+
 
   toogleImage(){
     this.showImage = !this.showImage;
@@ -36,7 +42,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     console.log(this.products);
   }
 
-  checkQty(event:any) {
+  getValue:any ='';
+
+  checkQty(event:any, index:any) {
     this.number = event.target.value;
     if (this.number >= 20) {
       this.btn = false; //Hidden = false
@@ -45,13 +53,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  onBuy(event:any, p:any){
+  onBuy(event:any){
     console.log(event);
-    console.log(p);
     this.notification = true;
   }
-
-
 
   getProducts(): IProduct[] {
     return [
