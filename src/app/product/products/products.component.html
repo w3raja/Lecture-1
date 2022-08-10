@@ -1,5 +1,5 @@
 <div class="row">
-    <input type="text" class="form-control" placeholder="Search Products" [(ngModel)]="pText" />
+    <input type="text" name="search" class="form-control" placeholder="Search Products" [(ngModel)]="pText" />
 </div>
 
 <div class="row">
@@ -30,7 +30,7 @@
                <td>{{p.Agency}}</td>
                <td>
                 <input type="number" placeholder="enter quantity" (input)="checkQty($event)" />
-                <button *ngIf="p.inStock" [ngClass]= "p.inStock ? 'btn btn-success' : 'btn btn-warning' "
+                <button *ngIf="p.inStock" class="btn btn-success"
                  [disabled]="btn"  (click)="onBuy($event, p.Id)"> Buy </button>
                 <span *ngIf="!p.inStock"> Out of Stock </span>
 
