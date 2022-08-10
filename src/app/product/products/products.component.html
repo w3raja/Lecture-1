@@ -1,0 +1,49 @@
+<div class="row">
+    <input type="text" class="form-control" placeholder="Search Products" [(ngModel)]="pText" />
+</div>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Image <button class="btn btn-info" (click)="toogleImage()">Show/Hide Image</button></th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Avaiable</th>
+                <th>Color</th>
+                <th>Dist</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of products | productSearch:pText" [id]="p.Id">
+               <td>{{p.Id}}</td>
+               <td>{{p.Title | uppercase}}</td>
+               <td><img *ngIf="showImage" [src]="p.Image" /></td>
+               <td>{{p.Price | currency}}</td>
+               <td>{{p.Quantity }}</td>
+               <td>{{p.inStock}}</td>
+               <td>{{p.Color}}</td>
+               <td>{{p.Agency}}</td>
+               <td>
+                <input type="number" placeholder="enter quantity" (input)="checkQty($event)" />
+                <button *ngIf="p.inStock" [ngClass]= "p.inStock ? 'btn btn-success' : 'btn btn-warning' "
+                 [disabled]="btn"  (click)="onBuy($event, p.Id)"> Buy </button>
+                <span *ngIf="!p.inStock"> Out of Stock </span>
+
+
+            </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+<div class="row text-center">
+    <p *ngIf="notification" class="text-primary">Added to cart</p>
+</div>
+
